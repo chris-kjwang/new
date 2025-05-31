@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', () => {
             articleBackground.innerHTML = marked(sections.background) || '暂无背景信息';
             articleMainIdeas.innerHTML = marked(sections.mainIdeas) || '暂无关键思想主旨';
             articleSummary.innerHTML = marked(sections.summary) || '暂无总结信息';
-            articleLinks.innerHTML = `<a href="#" class="text-red-600 hover:underline" target="_blank">查看原文 (示例链接)</a>`;
+            articleLinks.innerHTML = `<a href="#" class="text-red-600 hover:underline" target="_blank">查2看原文 (示例链接)</a>`;
 
             showPage('article-detail');
         } catch (error) {
