@@ -330,10 +330,11 @@ document.addEventListener('DOMContentLoaded', () => {
             //articleBackground.innerHTML = sections.background || '暂无背景信息';
             //articleMainIdeas.innerHTML = sections.mainIdeas || '暂无主要观点';
             //articleSummary.innerHTML = sections.summary || '暂无总结信息';
-            // 使用 marked 库将 Markdown 转换为 HTML
-            articleBackground.innerHTML = marked(sections.background) || '暂无背景信息';
-            articleMainIdeas.innerHTML = marked(sections.mainIdeas) || '暂无关键思想主旨';
-            articleSummary.innerHTML = marked(sections.summary) || '暂无总结信息';
+            // 创建 markdown-it 实例
+            const md = window.markdownit();
+            articleBackground.innerHTML = md.render(sections.background) || '暂无背景信息';
+            articleMainIdeas.innerHTML = md.render(sections.mainIdeas) || '暂无关键思想主旨';
+            articleSummary.innerHTML = md.render(sections.summary) || '暂无总结信息';
             // 创建 showdown 转换器实例
             //const converter = new showdown.Converter();
             //articleBackground.innerHTML = converter.makeHtml(sections.background) || '暂无背景信息';
