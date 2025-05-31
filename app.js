@@ -327,9 +327,9 @@ document.addEventListener('DOMContentLoaded', () => {
             articleYear.textContent = `(${article.year})`;
             
             // Simulate loading content (replace with actual MD parsing)
-            articleBackground.innerHTML = sections.background || '暂无背景信息';
-            articleMainIdeas.innerHTML = sections.mainIdeas || '暂无主要观点';
-            articleSummary.innerHTML = sections.summary || '暂无总结信息';
+            //articleBackground.innerHTML = sections.background || '暂无背景信息';
+            //articleMainIdeas.innerHTML = sections.mainIdeas || '暂无主要观点';
+            //articleSummary.innerHTML = sections.summary || '暂无总结信息';
             // 使用 marked 库将 Markdown 转换为 HTML
             articleBackground.innerHTML = marked(sections.background) || '暂无背景信息';
             articleMainIdeas.innerHTML = marked(sections.mainIdeas) || '暂无关键思想主旨';
