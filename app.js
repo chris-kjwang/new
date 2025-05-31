@@ -331,9 +331,14 @@ document.addEventListener('DOMContentLoaded', () => {
             //articleMainIdeas.innerHTML = sections.mainIdeas || '暂无主要观点';
             //articleSummary.innerHTML = sections.summary || '暂无总结信息';
             // 使用 marked 库将 Markdown 转换为 HTML
-            articleBackground.innerHTML = marked(sections.background) || '暂无背景信息';
-            articleMainIdeas.innerHTML = marked(sections.mainIdeas) || '暂无关键思想主旨';
-            articleSummary.innerHTML = marked(sections.summary) || '暂无总结信息';
+            //articleBackground.innerHTML = marked(sections.background) || '暂无背景信息';
+            //articleMainIdeas.innerHTML = marked(sections.mainIdeas) || '暂无关键思想主旨';
+            //articleSummary.innerHTML = marked(sections.summary) || '暂无总结信息';
+            // 创建 showdown 转换器实例
+            const converter = new showdown.Converter();
+            articleBackground.innerHTML = converter.makeHtml(sections.background) || '暂无背景信息';
+            articleMainIdeas.innerHTML = converter.makeHtml(sections.mainIdeas) || '暂无关键思想主旨';
+            articleSummary.innerHTML = converter.makeHtml(sections.summary) || '暂无总结信息';
             articleLinks.innerHTML = `<a href="#" class="text-red-600 hover:underline" target="_blank">查2看原文 (示例链接)</a>`;
 
             showPage('article-detail');
