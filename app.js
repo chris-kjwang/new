@@ -327,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
             articleYear.textContent = `(${article.year})`;
             
             // Simulate loading content (replace with actual MD parsing)
-            articleBackground.innerHTML = sections.background || '暂无背景信息1';
+            articleBackground.innerHTML = sections.background || '暂无背景信息';
             articleMainIdeas.innerHTML = sections.mainideas || '暂无主要观点';
             articleSummary.innerHTML = sections.summary || '暂无总结信息';
             articleLinks.innerHTML = `<a href="#" class="text-red-600 hover:underline" target="_blank">查看原文 (示例链接)</a>`;
