@@ -392,8 +392,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!summaryMatch) {
                 summaryMatch = markdown.match(/## 内容概要\s+([\s\S]*?)(?=##|$)/);
             }
-            if (summaryMatch && summaryMatch[1]) {
-                sections.summary = summaryMatch[1].trim();
+            if (summaryMatch && summaryMatch[2]) {
+                sections.summary = summaryMatch[2].trim();
                 console.log("成功提取内容摘要");
             } else {
                 console.log("未找到内容摘要部分");
