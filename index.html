@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习毛选 - 感受智慧</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="mobile-optimizations.css">
+    <!-- 引入思源黑体和思源宋体 -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@400;500;700&display=swap">
+</head>
+<body class="bg-gray-100 font-serif">
+    <!-- 顶部导航栏 -->
+    <header class="bg-red-700 text-white shadow-md fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold font-sans">学习毛选 · 感受智慧</h1>
+            <!-- 移动端菜单按钮 -->
+            <button id="menu-toggle" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+            <!-- PC端导航 -->
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="nav-link active" data-page="home">首页</a>
+                <a href="#" class="nav-link" data-page="quotes">抽语录</a>
+                <a href="#" class="nav-link" data-page="classics">学经典</a>
+                <a href="#" class="nav-link" data-page="chat">问经验</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 移动端导航菜单 -->
+    <div id="mobile-menu" class="fixed bottom-0 w-full bg-white shadow-lg z-40 md:hidden">
+        <div class="flex justify-around py-2">
+            <a href="#" class="flex flex-col items-center p-2 mobile-nav-link active" data-page="home">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                <span class="text-xs mt-1">首页</span>
+            </a>
+            <a href="#" class="flex flex-col items-center p-2 mobile-nav-link" data-page="quotes">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                </svg>
+                <span class="text-xs mt-1">抽语录</span>
+            </a>
+            <a href="#" class="flex flex-col items-center p-2 mobile-nav-link" data-page="classics">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+                <span class="text-xs mt-1">学经典</span>
+            </a>
+            <a href="#" class="flex flex-col items-center p-2 mobile-nav-link" data-page="chat">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                </svg>
+                <span class="text-xs mt-1">问经验</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 主内容区域 -->
+    <main class="container mx-auto px-4 pt-20 pb-20 md:pb-10">
+        <!-- 首页内容 -->
+        <section id="home-page" class="page-content active">
+            <div class="flex flex-col items-center justify-center min-h-[80vh] text-center">
+                <div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
+                    <h2 class="text-3xl md:text-4xl font-bold text-red-700 mb-6 font-sans">学习毛选 · 感受智慧</h2>
+                    <p class="text-gray-700 mb-8 text-lg">欢迎来到毛选学习网站，这里提供了丰富的毛泽东思想学习资源，帮助您更好地理解和感受毛泽东思想的智慧。</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-red-50 rounded-lg p-6 hover:shadow-md transition duration-300 transform hover:-translate-y-1">
+                            <div class="text-red-600 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 font-sans">抽语录</h3>
+                            <p class="text-gray-600 mb-4">随机抽取毛泽东经典语录，感受思想的力量。</p>
+                            <a href="#" class="feature-link" data-page="quotes">立即体验</a>
+                        </div>
+                        
+                        <div class="bg-red-50 rounded-lg p-6 hover:shadow-md transition duration-300 transform hover:-translate-y-1">
+                            <div class="text-red-600 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 font-sans">学经典</h3>
+                            <p class="text-gray-600 mb-4">系统学习毛泽东选集经典文章，了解创作背景与核心思想。</p>
+                            <a href="#" class="feature-link" data-page="classics">开始学习</a>
+                        </div>
+                        
+                        <div class="bg-red-50 rounded-lg p-6 hover:shadow-md transition duration-300 transform hover:-translate-y-1">
+                            <div class="text-red-600 mb-4">
+                                <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2 font-sans">问经验</h3>
+                            <p class="text-gray-600 mb-4">与"AI毛主席"对话，获取思想指导和历史经验。</p>
+                            <a href="#" class="feature-link" data-page="chat">开始对话</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 抽语录页面 -->
+        <section id="quotes-page" class="page-content hidden">
+            <div class="flex flex-col items-center justify-center min-h-[80vh]">
+                <div class="bg-white rounded-lg shadow-lg p-6 max-w-md w-full quote-card">
+                    <div class="quote-card-inner">
+                        <div class="quote-card-front">
+                            <div class="quote-content">
+                                <p id="quote-text" class="text-xl md:text-2xl text-gray-800 mb-4 leading-relaxed"></p>
+                            </div>
+                            <div class="mt-4 text-right">
+                                <p id="quote-source" class="text-sm text-gray-500"></p>
+                            </div>
+                        </div>
+                        <div class="quote-card-back">
+                            <div class="h-full flex flex-col justify-center items-center">
+                                <p id="quote-context" class="text-lg text-gray-700 mb-4"></p>
+                                <p id="quote-year" class="text-sm text-gray-500"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 flex space-x-4">
+                    <button id="flip-quote" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
+                        <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        翻转
+                    </button>
+                    <button id="new-quote" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition">
+                        <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                        再抽一条
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 学经典页面 -->
+        <section id="classics-page" class="page-content hidden">
+            <h2 class="text-2xl md:text-3xl font-bold mb-6 text-red-700 font-sans">毛泽东选集经典文章</h2>
+            
+            <!-- 分类导航 -->
+            <div class="categories-nav mb-8 overflow-x-auto whitespace-nowrap pb-2">
+                <button class="category-btn active" data-category="all">全部</button>
+                <button class="category-btn" data-category="philosophy">哲学思想</button>
+                <button class="category-btn" data-category="military">军事战略</button>
+                <button class="category-btn" data-category="revolution">革命策略</button>
+                <button class="category-btn" data-category="thought">思想建设</button>
+                <button class="category-btn" data-category="politics">政权建设</button>
+                <button class="category-btn" data-category="socialism">社会主义建设</button>
+            </div>
+            
+            <!-- 文章列表 -->
+            <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- 文章卡片将通过JavaScript动态生成 -->
+            </div>
+        </section>
+
+        <!-- 文章详情页 -->
+        <section id="article-detail-page" class="page-content hidden">
+            <div class="mb-4">
+                <button id="back-to-classics" class="flex items-center text-red-600 hover:text-red-800 transition">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                    </svg>
+                    返回文章列表
+                </button>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+                <h2 id="article-title" class="text-2xl md:text-3xl font-bold mb-2 text-red-700 font-sans"></h2>
+                <p id="article-year" class="text-gray-500 mb-6"></p>
+                
+                <div class="article-content">
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold mb-4 text-red-600 font-sans">创作背景与目的</h3>
+                        <div id="article-background" class="prose max-w-none"></div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold mb-4 text-red-600 font-sans">关键思想主旨</h3>
+                        <div id="article-main-ideas" class="prose max-w-none"></div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold mb-4 text-red-600 font-sans">内容摘要</h3>
+                        <div id="article-summary" class="prose max-w-none"></div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-red-600 font-sans">原文链接</h3>
+                        <div id="article-links"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 问经验页面 -->
+        <section id="chat-page" class="page-content hidden">
+            <div class="flex flex-col h-[80vh]">
+                <div class="bg-white rounded-lg shadow-lg p-4 mb-4">
+                    <h2 class="text-xl font-bold text-red-700 mb-2 font-sans">与毛主席对话</h2>
+                    <p class="text-gray-600">您可以向"AI毛主席"提问，获取思想指导和历史经验。</p>
+                </div>
+                
+                <!-- 预设问题 -->
+                <div class="bg-white rounded-lg shadow-lg p-4 mb-4 overflow-x-auto whitespace-nowrap">
+                    <div class="flex space-x-2">
+                        <button class="preset-question">如何看待理想与现实的关系？</button>
+                        <button class="preset-question">如何正确处理人民内部矛盾？</button>
+                        <button class="preset-question">如何理解实践与认识的关系？</button>
+                        <button class="preset-question">如何培养革命接班人？</button>
+                        <button class="preset-question">如何看待艰苦奋斗精神？</button>
+                    </div>
+                </div>
+                
+                <!-- 聊天区域 -->
+                <div id="chat-messages" class="flex-grow bg-gray-50 rounded-lg shadow-inner p-4 mb-4 overflow-y-auto">
+                    <div class="chat-message mao">
+                        <div class="flex items-start">
+                            <div class="mao-avatar mr-2 flex-shrink-0">
+                                <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600">
+                                    <span class="text-lg font-bold">毛</span>
+                                </div>
+                            </div>
+                            <div class="message-bubble">
+                                <p>同志们好！我是"AI毛主席"，你可以向我请教关于革命、建设、哲学等方面的问题，我会尽力用毛泽东思想的智慧来回答你。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 输入区域 -->
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <div class="flex">
+                        <input id="chat-input" type="text" placeholder="请输入您的问题..." class="flex-grow px-4 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                        <button id="send-message" class="bg-red-600 text-white px-4 py-2 rounded-r-lg hover:bg-red-700 transition">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 底部版权信息 -->
+    <footer class="bg-gray-800 text-white py-4 text-center">
+        <p>© 2025 学习毛选 · 感受智慧 | 本网站仅供学习交流使用</p>
+    </footer>
+
+    <script src="app.js"></script>
+    <script src="mao-ai.js"></script>
+    <script src="chat-integration.js"></script>
+</body>
+</html>

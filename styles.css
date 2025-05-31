@@ -1,0 +1,240 @@
+/* 全局样式 */
+:root {
+    --primary-color: #E53935;
+    --primary-dark: #B71C1C;
+    --primary-light: #FFCDD2;
+    --accent-color: #FFD700;
+    --accent-light: #FFF9C4;
+    --text-color: #333333;
+    --background-color: #F5F5F5;
+    --card-color: #FFFFFF;
+}
+
+body {
+    font-family: 'Noto Serif SC', serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNmOGY4ZjgiPjwvcmVjdD4KPC9zdmc+');
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 700;
+}
+
+/* 导航样式 */
+.nav-link, .mobile-nav-link {
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.3s;
+    position: relative;
+}
+
+.nav-link:hover, .mobile-nav-link:hover {
+    color: white;
+}
+
+.nav-link.active, .mobile-nav-link.active {
+    color: white;
+    font-weight: 500;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+.mobile-nav-link.active {
+    color: var(--primary-color);
+}
+
+.mobile-nav-link.active svg {
+    color: var(--primary-color);
+}
+
+/* 首页功能链接 */
+.feature-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 0.375rem;
+    transition: background-color 0.3s;
+    font-weight: 500;
+}
+
+.feature-link:hover {
+    background-color: var(--primary-dark);
+}
+
+/* 页面内容 */
+.page-content {
+    display: none;
+}
+
+.page-content.active {
+    display: block;
+}
+
+/* 抽语录卡片 */
+.quote-card {
+    perspective: 1000px;
+    height: 300px;
+}
+
+.quote-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.quote-card.flipped .quote-card-inner {
+    transform: rotateY(180deg);
+}
+
+.quote-card-front, .quote-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--card-color);
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNmOGY4ZjgiPjwvcmVjdD4KPC9zdmc+');
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.quote-card-back {
+    transform: rotateY(180deg);
+}
+
+.quote-content {
+    position: relative;
+}
+
+.quote-content::before {
+    content: '"';
+    font-size: 4rem;
+    position: absolute;
+    top: -2rem;
+    left: -1rem;
+    color: rgba(183, 28, 28, 0.1);
+    font-family: serif;
+}
+
+/* 分类导航 */
+.categories-nav {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.category-btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--background-color);
+    border: 1px solid #ddd;
+    border-radius: 0.375rem;
+    transition: all 0.3s;
+    font-size: 0.875rem;
+}
+
+.category-btn:hover {
+    background-color: #eee;
+}
+
+.category-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* 文章卡片 */
+.article-card {
+    background-color: var(--card-color);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.article-image {
+    height: 160px;
+    background-size: cover;
+    background-position: center;
+}
+
+/* 聊天样式 */
+.chat-message {
+    margin-bottom: 1rem;
+}
+
+.message-bubble {
+    background-color: var(--card-color);
+    padding: 0.75rem 1rem;
+    border-radius: 1rem;
+    max-width: 80%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.chat-message.user .message-bubble {
+    background-color: var(--primary-light);
+    margin-left: auto;
+}
+
+.preset-question {
+    padding: 0.5rem 1rem;
+    background-color: var(--background-color);
+    border: 1px solid #ddd;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    transition: all 0.3s;
+}
+
+.preset-question:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary-color);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .message-bubble {
+        max-width: 90%;
+    }
+}
+
+/* 打字机效果 */
+.typewriter {
+    overflow: hidden;
+    border-right: .15em solid var(--primary-color);
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: .15em;
+    animation: 
+        typing 3.5s steps(40, end),
+        blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary-color) }
+}

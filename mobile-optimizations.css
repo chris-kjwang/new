@@ -1,0 +1,144 @@
+/* 额外的移动端优化样式 */
+@media (max-width: 768px) {
+    /* 改善移动端触摸体验 */
+    .nav-link, .mobile-nav-link, .feature-link, .category-btn, .preset-question, button {
+        padding: 0.75rem 1rem;  /* 增大触摸区域 */
+    }
+    
+    /* 确保移动端输入框足够大 */
+    #chat-input {
+        font-size: 16px;  /* 防止iOS自动缩放 */
+        padding: 0.75rem;
+    }
+    
+    /* 改善移动端卡片阅读体验 */
+    .quote-card {
+        height: 250px;  /* 稍微减小高度适应小屏幕 */
+    }
+    
+    /* 移动端文章详情页优化 */
+    #article-detail-page h2 {
+        font-size: 1.5rem;
+    }
+    
+    #article-detail-page h3 {
+        font-size: 1.25rem;
+    }
+    
+    /* 移动端底部导航栏优化 */
+    #mobile-menu {
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* 确保移动端聊天气泡合适大小 */
+    .message-bubble {
+        max-width: 85%;
+        padding: 0.75rem;
+    }
+}
+
+/* 打字机效果优化 */
+.typewriter {
+    white-space: pre-wrap;  /* 允许文本换行 */
+    overflow: visible;  /* 修改为可见，避免截断 */
+    border-right: none;  /* 移除闪烁光标，使用自定义光标 */
+    position: relative;
+}
+
+.typewriter::after {
+    content: '|';
+    position: absolute;
+    right: -4px;
+    animation: blink-caret 0.75s step-end infinite;
+}
+
+/* 思考动画优化 */
+@keyframes thinking {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+.thinking-dots {
+    display: inline-block;
+    letter-spacing: 2px;
+}
+
+/* 卡片翻转效果优化 */
+.quote-card {
+    transition: transform 0.3s ease;
+}
+
+.quote-card:hover {
+    transform: translateY(-5px);
+}
+
+.quote-card-inner {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);  /* 更平滑的动画 */
+}
+
+/* 文章卡片悬停效果优化 */
+.article-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 按钮点击反馈效果 */
+button {
+    transition: transform 0.1s ease, background-color 0.3s ease;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* 页面过渡效果 */
+.page-content {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.page-content.active {
+    opacity: 1;
+}
+
+/* 高对比度模式支持 */
+@media (prefers-contrast: high) {
+    :root {
+        --primary-color: #B71C1C;
+        --text-color: #000000;
+        --background-color: #FFFFFF;
+    }
+    
+    .nav-link, .mobile-nav-link {
+        color: white;
+    }
+    
+    .message-bubble {
+        border: 1px solid #000000;
+    }
+}
+
+/* 减少动画模式支持 */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001s !important;
+        transition-duration: 0.001s !important;
+    }
+    
+    .quote-card-inner {
+        transition: none;
+    }
+    
+    .typewriter {
+        white-space: normal;
+    }
+    
+    .typewriter::after {
+        display: none;
+    }
+}
