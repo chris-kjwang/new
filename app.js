@@ -1,5 +1,5 @@
 // 导入 MaoAIChat 模块
-import { MaoAIChat } from '../mao-ai.js';
+import { MaoAIChat } from 'mao-ai.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const pages = document.querySelectorAll('.page-content');
