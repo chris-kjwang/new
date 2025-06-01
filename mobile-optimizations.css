@@ -46,6 +46,7 @@
     overflow: visible;  /* 修改为可见，避免截断 */
     border-right: none;  /* 移除闪烁光标，使用自定义光标 */
     position: relative;
+    text-align: left; /* 强制文本左对齐 */
 }
 
 .typewriter::after {
@@ -53,6 +54,11 @@
     position: absolute;
     right: -4px;
     animation: blink-caret 0.75s step-end infinite;
+}
+
+/* 确保父元素没有意外的文本对齐样式 */
+.typewriter-parent {
+    text-align: left !important;
 }
 
 /* 思考动画优化 */
