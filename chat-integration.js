@@ -86,34 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    function getMaoResponse(userMessage) {
-        // 如果增强版AI可用，使用增强版
-        if (maoAI) {
-            maoAI.addUserMessage(userMessage);
-            const response = maoAI.generateResponse(userMessage);
-            maoAI.addAIResponse(response);
-            return response;
-        }
-        
-        // 否则使用基础版回复逻辑（从app.js复制）
-        const lowerMessage = userMessage.toLowerCase();
-        if (lowerMessage.includes('矛盾')) {
-            return "矛盾是普遍存在的，要区分敌我矛盾和人民内部矛盾。对于人民内部矛盾，要用民主的方法，说服教育的方法，'团结—批评—团结'的方法去解决。";
-        } else if (lowerMessage.includes('实践') || lowerMessage.includes('认识')) {
-            return "实践、认识、再实践、再认识，这种形式，循环往复以至无穷，而实践和认识之每一循环的内容，都比较地进到了高一级的程度。这就是辩证唯物论的全部认识论。";
-        } else if (lowerMessage.includes('学习')) {
-            return "情况是在不断地变化，要使自己的思想适应新的情况，就得学习。学习的敌人是自己的满足，要认真学习一点东西，必须从不自满开始。";
-        } else if (lowerMessage.includes('困难') || lowerMessage.includes('失败')) {
-            return "我们的同志在困难的时候，要看到成绩，要看到光明，要提高我们的勇气。前途是光明的，道路是曲折的。下定决心，不怕牺牲，排除万难，去争取胜利。";
-        } else if (lowerMessage.includes('青年') || lowerMessage.includes('年轻人')) {
-            return "世界是你们的，也是我们的，但是归根结底是你们的。你们青年人朝气蓬勃，正在兴旺时期，好像早晨八九点钟的太阳。希望寄托在你们身上。";
-        } else if (lowerMessage.includes('你好') || lowerMessage.includes('您好')) {
-            return "同志你好！有什么问题可以问我。";
-        } else {
-            return "这个问题提得很好。我们要具体问题具体分析，要调查研究，才能找到正确的答案。";
-        }
-    }
-
     function handleSendMessage() {
         const messageText = chatInput.value.trim();
         if (messageText) {
@@ -144,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 chatMessages.removeChild(thinkingDiv);
                 
                 // 获取毛主席回复
-                const maoReply = getMaoResponse(messageText);
+                const maoReply = maoAI.getMaoResponse(messageText);
                 
                 // 使用打字机效果添加回复
                 addMessage('mao', maoReply, true);
