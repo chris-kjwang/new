@@ -71,7 +71,7 @@ images<!DOCTYPE html>
             <div class="flex flex-col items-center justify-center min-h-[80vh] text-center">
                 <div class="bg-white rounded-lg shadow-lg p-8 max-w-2xl w-full">
                     <h2 class="text-3xl md:text-4xl font-bold text-red-700 mb-6 font-sans">学习毛选 · 感受智慧</h2>
-                    <p class="text-gray-700 mb-8 text-lg">欢迎来到毛选学习网站，这里提供了丰富的毛泽东思想学习资源，帮助您更好地理解和感受毛泽东思想的智慧。</p>
+                    <p class="text-gray-700 mb-8 text-lg">欢迎来到毛选学习网站，这里有丰富的资源，带您学习毛泽东思想的智慧。</p>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="bg-red-50 rounded-lg p-6 hover:shadow-md transition duration-300 transform hover:-translate-y-1">
@@ -103,7 +103,7 @@ images<!DOCTYPE html>
                                 </svg>
                             </div>
                             <h3 class="text-xl font-bold mb-2 font-sans">问经验</h3>
-                            <p class="text-gray-600 mb-4">与"AI毛主席"对话，获取思想指导和经验。</p>
+                            <p class="text-gray-600 mb-4">与"AI毛主席"对话，获取人生经验。</p>
                             <a href="#" class="feature-link" data-page="chat">开始对话</a>
                         </div>
                     </div>
@@ -113,7 +113,8 @@ images<!DOCTYPE html>
 
         <!-- 抽语录页面 -->
         <section id="quotes-page" class="page-content hidden">
-            <div class="flex flex-col items-center justify-center min-h-[80vh]">
+            <!-- 修改为 justify-center 并添加 min-h-screen 以确保覆盖整个屏幕高度 -->
+            <div class="flex flex-col items-center justify-center min-h-screen">
                 <div class="bg-white rounded-lg shadow-lg p-6 max-w-md w-full quote-card">
                     <div class="quote-card-inner">
                         <div class="quote-card-front">
@@ -149,6 +150,43 @@ images<!DOCTYPE html>
                 </div>
             </div>
         </section>
+        <!-- <section id="quotes-page" class="page-content hidden">
+            <div class="flex flex-col items-center justify-center min-h-[80vh]">
+                <div class="bg-white rounded-lg shadow-lg p-6 max-w-md w-full quote-card">
+                    <div class="quote-card-inner">
+                        <div class="quote-card-front">
+                            <div class="quote-content">
+                                <p id="quote-text" class="text-xl md:text-2xl text-gray-800 mb-4 leading-relaxed"></p>
+                            </div>
+                            <div class="mt-4 text-right">
+                                <p id="quote-source" class="text-sm text-gray-500"></p>
+                            </div>
+                        </div>
+                        <div class="quote-card-back">
+                            <div class="h-full flex flex-col justify-center items-center">
+                                <p id="quote-context" class="text-lg text-gray-700 mb-4"></p>
+                                <p id="quote-year" class="text-sm text-gray-500"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 flex space-x-4">
+                    <button id="flip-quote" class="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition">
+                        <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                        </svg>
+                        翻转
+                    </button>
+                    <button id="new-quote" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition">
+                        <svg class="w-5 h-5 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                        </svg>
+                        再抽一条
+                    </button>
+                </div>
+            </div>
+        </section> -->
 
         <!-- 学经典页面 -->
         <section id="classics-page" class="page-content hidden">
