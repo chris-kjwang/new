@@ -657,10 +657,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // 移除思考中状态
             chatMessages.removeChild(thinkingDiv);
             // 获取毛主席回复
-            const maoReply = maoAI.getMaoResponse(message);
-            // 使用打字机效果添加回复
-            console.log("maoReply:", maoReply);
-            addMessage('mao', maoReply, true);
+            maoAI.getMaoResponse(message)
+            .then((maoReply) => {
+                // 使用打字机效果添加回复
+                console.log("maoReply:", maoReply);
+                addMessage('mao', maoReply, true);
+            })
+            .catch((error) => {
+              console.error('获取毛主席回复时出错:', error);
+              // 可以在这里添加错误处理逻辑，比如显示错误提示给用户
+            });
+            // const maoReply = maoAI.getMaoResponse(message);
         }, 1000 + Math.random() * 1000);
     }
 
