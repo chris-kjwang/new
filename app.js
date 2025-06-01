@@ -2,6 +2,7 @@
 import { MaoAIChat } from './mao-ai.js';
 // 将 MaoAIChat 挂载到 window 对象上
 window.MaoAIChat = MaoAIChat;
+import { sendMessageAndGetResponse } from './chat-integration.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const pages = document.querySelectorAll('.page-content');
@@ -521,27 +522,6 @@ document.addEventListener('DOMContentLoaded', () => {
             sendMessageAndGetResponse(messageText);
         }
     }
-
-    if (sendMessageBtn && chatInput) {
-        sendMessageBtn.addEventListener('click', handleSendMessage);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleSendMessage();
-            }
-        });
-    }
-
-    presetQuestionBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const question = btn.textContent;
-            addMessage('user', question);
-            // Simulate AI response delay
-            setTimeout(() => {
-                const maoReply = maoAI.getMaoResponse(question);
-                addMessage('mao', maoReply);
-            }, 1000 + Math.random() * 1000);
-        });
-    });
 
     // --- Initial Load ---
     fetchQuotes();
