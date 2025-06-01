@@ -520,6 +520,35 @@ document.addEventListener('DOMContentLoaded', () => {
         if (messageText) {
             chatInput.value = '';
             sendMessageAndGetResponse(messageText);
+            // 添加用户消息
+            addMessage('user', message);
+            
+            // 显示思考中状态
+            const thinkingDiv = document.createElement('div');
+            thinkingDiv.className = 'chat-message mao thinking';
+            thinkingDiv.innerHTML = `
+                <div class="flex items-start">
+                    <div class="mao-avatar mr-2 flex-shrink-0">
+                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600">
+                            <span class="text-lg font-bold">毛</span>
+                        </div>
+                    </div>
+                    <div class="message-bubble">
+                        <p>思考中<span class="thinking-dots">...</span></p>
+                    </div>
+                </div>`;
+            chatMessages.appendChild(thinkingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // 模拟AI思考和回复延迟
+            setTimeout(() => {
+                // 移除思考中状态
+                chatMessages.removeChild(thinkingDiv);
+                // 获取毛主席回复
+                const maoReply = maoAI.getMaoResponse(message);
+                // 使用打字机效果添加回复
+                addMessage('mao', maoReply, true);
+            }, 1000 + Math.random() * 1000);
         }
     }
 
