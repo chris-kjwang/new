@@ -517,14 +517,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleSendMessage() {
         const messageText = chatInput.value.trim();
         if (messageText) {
-            addMessage('user', messageText);
             chatInput.value = '';
-            
-            // Simulate AI response delay
-            setTimeout(() => {
-                const maoReply = getMaoResponse(messageText);
-                addMessage('mao', maoReply);
-            }, 1000 + Math.random() * 1000);
+            sendMessageAndGetResponse(messageText);
         }
     }
 
@@ -543,7 +537,7 @@ document.addEventListener('DOMContentLoaded', () => {
             addMessage('user', question);
             // Simulate AI response delay
             setTimeout(() => {
-                const maoReply = getMaoResponse(question);
+                const maoReply = maoAI.getMaoResponse(question);
                 addMessage('mao', maoReply);
             }, 1000 + Math.random() * 1000);
         });
