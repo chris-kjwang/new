@@ -536,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="message-bubble user"><p>${text}</p></div>
                     <div class="user-avatar ml-2 flex-shrink-0">
                          <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
-                            <span class="text-lg font-bold">您</span>
+                            <span class="text-lg font-bold">我</span>
                         </div>
                     </div>
                 </div>`;
@@ -654,13 +654,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // 模拟AI思考和回复延迟
         setTimeout(() => {
-            // 移除思考中状态
-            chatMessages.removeChild(thinkingDiv);
+
             // 获取毛主席回复
             maoAI.getMaoResponse(message)
             .then((maoReply) => {
+                // 移除思考中状态
+                chatMessages.removeChild(thinkingDiv);
                 // 使用打字机效果添加回复
-                console.log("maoReply:", maoReply);
                 addMessage('mao', maoReply, true);
             })
             .catch((error) => {
