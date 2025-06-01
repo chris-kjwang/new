@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
             //articleBackground.innerHTML = converter.makeHtml(sections.background) || '暂无背景信息';
             //articleMainIdeas.innerHTML = converter.makeHtml(sections.mainIdeas) || '暂无关键思想主旨';
             //articleSummary.innerHTML = converter.makeHtml(sections.summary) || '暂无总结信息';
-            articleLinks.innerHTML = `<a href="${sections.link}" class="text-red-600 hover:underline" target="_blank">查看原文 (示例链接)</a>`;
+            articleLinks.innerHTML = `<a href="${sections.link}" class="text-red-600 hover:underline" target="_blank">点击查看原文</a>`;
 
             showPage('article-detail');
         } catch (error) {
