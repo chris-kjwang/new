@@ -503,25 +503,64 @@ document.addEventListener('DOMContentLoaded', () => {
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
     }
+    // 引入 MaoAIChat 类
+    let MaoAIChat;
+    try {
+        // 尝试引入 MaoAIChat 类
+        MaoAIChat = require('./mao-ai.js').MaoAIChat;
+    } catch (error) {
+        console.warn('无法引入 MaoAIChat 类，将使用基础对话系统', error);
+    }
+
+    let maoAI;
+    if (MaoAIChat) {
+        maoAI = new MaoAIChat();
+    }
 
     function getMaoResponse(userMessage) {
-        // Simple placeholder responses based on keywords
-        // TODO: Replace with actual LLM call or more sophisticated logic
-        const lowerMessage = userMessage.toLowerCase();
-        if (lowerMessage.includes('矛盾')) {
-            return "矛盾是普遍存在的，要区分敌我矛盾和人民内部矛盾。对于人民内部矛盾，要用民主的方法，说服教育的方法，‘团结—批评—团结’的方法去解决。";
-        } else if (lowerMessage.includes('实践') || lowerMessage.includes('认识')) {
-            return "实践、认识、再实践、再认识，这种形式，循环往复以至无穷，而实践和认识之每一循环的内容，都比较地进到了高一级的程度。这就是辩证唯物论的全部认识论。";
-        } else if (lowerMessage.includes('学习')) {
-            return "情况是在不断地变化，要使自己的思想适应新的情况，就得学习。学习的敌人是自己的满足，要认真学习一点东西，必须从不自满开始。";
-        } else if (lowerMessage.includes('困难') || lowerMessage.includes('失败')) {
-            return "我们的同志在困难的时候，要看到成绩，要看到光明，要提高我们的勇气。前途是光明的，道路是曲折的。下定决心，不怕牺牲，排除万难，去争取胜利。";
-        } else if (lowerMessage.includes('青年') || lowerMessage.includes('年轻人')) {
-            return "世界是你们的，也是我们的，但是归根结底是你们的。你们青年人朝气蓬勃，正在兴旺时期，好像早晨八九点钟的太阳。希望寄托在你们身上。";
-        } else if (lowerMessage.includes('你好') || lowerMessage.includes('您好')) {
-            return "同志你好！有什么问题可以问我。";
+        // 如果增强版 AI 可用，使用增强版
+        if (maoAI) {
+            maoAI.addUserMessage(userMessage);
+            // 假设 apiKey 已经定义，实际使用时需要替换为真实的 apiKey
+            const apiKey = 'sk-invxxysuprmxlqevpphfalkhhqzmyvvvijrxuqyeooeaqntb'; 
+            return maoAI.generateResponse(userMessage, apiKey).catch((error) => {
+                console.error('生成回复时出错:', error);
+                // 出错时使用基础版回复逻辑
+                const lowerMessage = userMessage.toLowerCase();
+                if (lowerMessage.includes('矛盾')) {
+                    return "矛盾是普遍存在的，要区分敌我矛盾和人民内部矛盾。对于人民内部矛盾，要用民主的方法，说服教育的方法，‘团结—批评—团结’的方法去解决。";
+                } else if (lowerMessage.includes('实践') || lowerMessage.includes('认识')) {
+                    return "实践、认识、再实践、再认识，这种形式，循环往复以至无穷，而实践和认识之每一循环的内容，都比较地进到了高一级的程度。这就是辩证唯物论的全部认识论。";
+                } else if (lowerMessage.includes('学习')) {
+                    return "情况是在不断地变化，要使自己的思想适应新的情况，就得学习。学习的敌人是自己的满足，要认真学习一点东西，必须从不自满开始。";
+                } else if (lowerMessage.includes('困难') || lowerMessage.includes('失败')) {
+                    return "我们的同志在困难的时候，要看到成绩，要看到光明，要提高我们的勇气。前途是光明的，道路是曲折的。下定决心，不怕牺牲，排除万难，去争取胜利。";
+                } else if (lowerMessage.includes('青年') || lowerMessage.includes('年轻人')) {
+                    return "世界是你们的，也是我们的，但是归根结底是你们的。你们青年人朝气蓬勃，正在兴旺时期，好像早晨八九点钟的太阳。希望寄托在你们身上。";
+                } else if (lowerMessage.includes('你好') || lowerMessage.includes('您好')) {
+                    return "同志你好！有什么问题可以问我。";
+                } else {
+                    return "这个问题提得很好。我们要具体问题具体分析，要调查研究，才能找到正确的答案。";
+                }
+            });
         } else {
-            return "这个问题提得很好。我们要具体问题具体分析，要调查研究，才能找到正确的答案。";
+            // 否则使用基础版回复逻辑
+            const lowerMessage = userMessage.toLowerCase();
+            if (lowerMessage.includes('矛盾')) {
+                return "矛盾是普遍存在的，要区分敌我矛盾和人民内部矛盾。对于人民内部矛盾，要用民主的方法，说服教育的方法，‘团结—批评—团结’的方法去解决。";
+            } else if (lowerMessage.includes('实践') || lowerMessage.includes('认识')) {
+                return "实践、认识、再实践、再认识，这种形式，循环往复以至无穷，而实践和认识之每一循环的内容，都比较地进到了高一级的程度。这就是辩证唯物论的全部认识论。";
+            } else if (lowerMessage.includes('学习')) {
+                return "情况是在不断地变化，要使自己的思想适应新的情况，就得学习。学习的敌人是自己的满足，要认真学习一点东西，必须从不自满开始。";
+            } else if (lowerMessage.includes('困难') || lowerMessage.includes('失败')) {
+                return "我们的同志在困难的时候，要看到成绩，要看到光明，要提高我们的勇气。前途是光明的，道路是曲折的。下定决心，不怕牺牲，排除万难，去争取胜利。";
+            } else if (lowerMessage.includes('青年') || lowerMessage.includes('年轻人')) {
+                return "世界是你们的，也是我们的，但是归根结底是你们的。你们青年人朝气蓬勃，正在兴旺时期，好像早晨八九点钟的太阳。希望寄托在你们身上。";
+            } else if (lowerMessage.includes('你好') || lowerMessage.includes('您好')) {
+                return "同志你好！有什么问题可以问我。";
+            } else {
+                return "这个问题提得很好。我们要具体问题具体分析，要调查研究，才能找到正确的答案。";
+            }
         }
     }
 

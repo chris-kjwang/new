@@ -41,12 +41,57 @@ class MaoAIChat {
     }
 
     // 生成AI回复
-    generateResponse(userMessage) {
-        // 在实际应用中，这里会调用大模型API
-        // 这里我们使用本地模拟逻辑
-        return this.simulateAIResponse(userMessage);
-    }
+    async generateResponse(userMessage, apiKey) {
+        try {
+            const messages = [
+                { role: 'system', content: this.systemPrompt },
+                ...this.chatHistory,
+                { role: 'user', content: userMessage }
+            ];
 
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer sk-invxxysuprmxlqevpphfalkhhqzmyvvvijrxuqyeooeaqntb`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "model": "Qwen/Qwen3-8B",
+                    "messages": messages,
+                    "stream": false,
+                    "max_tokens": 512,
+                    "enable_thinking": false,
+                    "thinking_budget": 4096,
+                    "min_p": 0.05,
+                    "stop": null,
+                    "temperature": 0.7,
+                    "top_p": 0.7,
+                    "top_k": 50,
+                    "frequency_penalty": 0.5,
+                    "n": 1,
+                    "response_format": { "type": "text" },
+                    "tools": [{
+                        "type": "function",
+                        "function": {
+                            "description": "<string>",
+                            "name": "<string>",
+                            "parameters": {},
+                            "strict": false
+                        }
+                    }]
+                })
+            };
+
+            const response = await fetch('https://api.siliconflow.cn/v1/chat/completions', options);
+            const data = await response.json();
+            const aiResponse = data.choices[0].message.content;
+            this.addAIResponse(aiResponse);
+            return this.formatResponse(aiResponse);
+        } catch (error) {
+            console.error('调用大模型时出错:', error);
+            return this.simulateAIResponse(userMessage);
+        }
+    }
     // 模拟AI回复（本地逻辑，实际应用中会替换为API调用）
     simulateAIResponse(userMessage) {
         const lowerMessage = userMessage.toLowerCase();
@@ -182,28 +227,7 @@ class MaoAIChat {
         }
     }
 
-    // 格式化回复，添加一些毛式语言特点
-    formatResponse(content) {
-        // 添加一些毛式语言特点的结尾词
-        const endings = [
-            "这是我的一些看法，供你参考。",
-            "希望对你有所帮助，同志。",
-            "让我们共同努力，为人民服务！",
-            "这些是我的一些体会，你认为如何？",
-            "我们要不断学习，不断进步。",
-            "实践是检验真理的唯一标准，你去试试看。"
-        ];
-        
-        // 随机选择一个结尾
-        const randomEnding = endings[Math.floor(Math.random() * endings.length)];
-        
-        // 如果内容已经很长，就不添加结尾了
-        if (content.length > 500) {
-            return content;
-        } else {
-            return content + "\n\n" + randomEnding;
-        }
-    }
+
 }
 
 // 导出模块
