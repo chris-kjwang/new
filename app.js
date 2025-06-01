@@ -303,8 +303,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'article-card bg-white rounded-lg shadow-md overflow-hidden cursor-pointer';
             card.dataset.articleId = article.id;
+            // 使用文章ID动态生成图片路径，并添加降级处理
+            const articleImagePath = `images/articles/mao_${article.id}.jpg`;
+
             card.innerHTML = `
-                <div class="article-image bg-gray-200" style="background-image: url('placeholder.jpg')"></div> <!-- Placeholder image -->
+                <div class="article-image bg-gray-200" style="background-image: url('${articleImagePath}')"></div>
                 <div class="p-4">
                     <h3 class="text-lg font-bold mb-1 font-sans">${article.title}</h3>
                     <p class="text-sm text-gray-500 mb-2">(${article.year})</p>
