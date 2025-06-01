@@ -479,21 +479,57 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatInput = document.getElementById('chat-input');
     const sendMessageBtn = document.getElementById('send-message');
     const presetQuestionBtns = document.querySelectorAll('.preset-question');
+    let maoAI;
+    if (MaoAIChat) {
+        maoAI = new MaoAIChat();
+    }
+    // 打字机效果函数
+    function typewriterEffect(element, text, speed = 30) {
+        let i = 0;
+        element.textContent = '';
+        
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else {
+                // 打字完成后移除打字机效果类
+                element.classList.remove('typewriter');
+            }
+        }
+        
+        element.classList.add('typewriter');
+        type();
+    }
 
-    function addMessage(sender, text) {
+    function addMessage(sender, text, useTypewriter = false) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `chat-message ${sender}`;
         
         if (sender === 'mao') {
-            messageDiv.innerHTML = `
+            const messageBubbleHTML = `
                 <div class="flex items-start">
                     <div class="mao-avatar mr-2 flex-shrink-0">
                         <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600">
                             <span class="text-lg font-bold">毛</span>
                         </div>
                     </div>
-                    <div class="message-bubble"><p>${text}</p></div>
+                    <div class="message-bubble">
+                        <p id="latest-mao-message">${useTypewriter ? '' : text}</p>
+                    </div>
                 </div>`;
+            
+            messageDiv.innerHTML = messageBubbleHTML;
+            chatMessages.appendChild(messageDiv);
+            
+            if (useTypewriter) {
+                const messageElement = messageDiv.querySelector('#latest-mao-message');
+                // 移除ID以避免重复
+                messageElement.removeAttribute('id');
+                // 应用打字机效果
+                typewriterEffect(messageElement, text, 30);
+            }
         } else { // sender === 'user'
             messageDiv.innerHTML = `
                 <div class="flex items-start justify-end">
@@ -504,14 +540,127 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                     </div>
                 </div>`;
+            chatMessages.appendChild(messageDiv);
         }
-        chatMessages.appendChild(messageDiv);
-        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+        
+        // 滚动到底部
+        chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    let maoAI;
-    if (MaoAIChat) {
-        maoAI = new MaoAIChat();
+    //     const messageText = chatInput.value.trim();
+    //     if (messageText) {
+    //         // 添加用户消息
+    //         addMessage('user', messageText);
+    //         chatInput.value = '';
+            
+    //         // 显示思考中状态
+    //         const thinkingDiv = document.createElement('div');
+    //         thinkingDiv.className = 'chat-message mao thinking';
+    //         thinkingDiv.innerHTML = `
+    //             <div class="flex items-start">
+    //                 <div class="mao-avatar mr-2 flex-shrink-0">
+    //                     <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600">
+    //                         <span class="text-lg font-bold">毛</span>
+    //                     </div>
+    //                 </div>
+    //                 <div class="message-bubble">
+    //                     <p>思考中<span class="thinking-dots">...</span></p>
+    //                 </div>
+    //             </div>`;
+    //         chatMessages.appendChild(thinkingDiv);
+    //         chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+    //         // 模拟AI思考和回复延迟
+    //         setTimeout(() => {
+    //             // 移除思考中状态
+    //             chatMessages.removeChild(thinkingDiv);
+                
+    //             // 获取毛主席回复
+    //             const maoReply = maoAI.getMaoResponse(messageText);
+                
+    //             // 使用打字机效果添加回复
+    //             addMessage('mao', maoReply, true);
+    //         }, 1000 + Math.random() * 1000);
+    //     }
+    // }
+
+    // if (sendMessageBtn && chatInput) {
+    //     sendMessageBtn.addEventListener('click', handleSendMessage);
+    //     chatInput.addEventListener('keypress', (e) => {
+    //         if (e.key === 'Enter') {
+    //             handleSendMessage();
+    //         }
+    //     });
+    // }
+
+    // presetQuestionBtns.forEach(btn => {
+    //     btn.addEventListener('click', () => {
+    //         const question = btn.textContent;
+    //         // 添加用户消息
+    //         addMessage('user', question);
+            
+    //         // 显示思考中状态
+    //         const thinkingDiv = document.createElement('div');
+    //         thinkingDiv.className = 'chat-message mao thinking';
+    //         thinkingDiv.innerHTML = `
+    //             <div class="flex items-start">
+    //                 <div class="mao-avatar mr-2 flex-shrink-0">
+    //                     <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600">
+    //                         <span class="text-lg font-bold">毛</span>
+    //                     </div>
+    //                 </div>
+    //                 <div class="message-bubble">
+    //                     <p>思考中<span class="thinking-dots">...</span></p>
+    //                 </div>
+    //             </div>`;
+    //         chatMessages.appendChild(thinkingDiv);
+    //         chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+    //         // 模拟AI思考和回复延迟
+    //         setTimeout(() => {
+    //             // 移除思考中状态
+    //             chatMessages.removeChild(thinkingDiv);
+                
+    //             // 获取毛主席回复
+    //             const maoReply = maoAI.getMaoResponse(question);
+                
+    //             // 使用打字机效果添加回复
+    //             addMessage('mao', maoReply, true);
+    //         }, 1000 + Math.random() * 1000);
+    //     });
+    // });
+
+    // 提取公共逻辑到一个新函数
+    function sendMessageAndGetResponse(message) {
+        // 添加用户消息
+        addMessage('user', message);
+        
+        // 显示思考中状态
+        const thinkingDiv = document.createElement('div');
+        thinkingDiv.className = 'chat-message mao thinking';
+        thinkingDiv.innerHTML = `
+            <div class="flex items-start">
+                <div class="mao-avatar mr-2 flex-shrink-0">
+                    <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600">
+                        <span class="text-lg font-bold">毛</span>
+                    </div>
+                </div>
+                <div class="message-bubble">
+                    <p>思考中<span class="thinking-dots">...</span></p>
+                </div>
+            </div>`;
+        chatMessages.appendChild(thinkingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        
+        // 模拟AI思考和回复延迟
+        setTimeout(() => {
+            // 移除思考中状态
+            chatMessages.removeChild(thinkingDiv);
+            // 获取毛主席回复
+            const maoReply = maoAI.getMaoResponse(message);
+            // 使用打字机效果添加回复
+            addMessage('mao', maoReply, true);
+        }, 1000 + Math.random() * 1000);
     }
 
     function handleSendMessage() {
@@ -519,39 +668,115 @@ document.addEventListener('DOMContentLoaded', () => {
         if (messageText) {
             chatInput.value = '';
             sendMessageAndGetResponse(messageText);
-            // 添加用户消息
-            addMessage('user', message);
-            
-            // 显示思考中状态
-            const thinkingDiv = document.createElement('div');
-            thinkingDiv.className = 'chat-message mao thinking';
-            thinkingDiv.innerHTML = `
-                <div class="flex items-start">
-                    <div class="mao-avatar mr-2 flex-shrink-0">
-                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600">
-                            <span class="text-lg font-bold">毛</span>
-                        </div>
-                    </div>
-                    <div class="message-bubble">
-                        <p>思考中<span class="thinking-dots">...</span></p>
-                    </div>
-                </div>`;
-            chatMessages.appendChild(thinkingDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-            
-            // 模拟AI思考和回复延迟
-            setTimeout(() => {
-                // 移除思考中状态
-                chatMessages.removeChild(thinkingDiv);
-                // 获取毛主席回复
-                const maoReply = maoAI.getMaoResponse(message);
-                // 使用打字机效果添加回复
-                addMessage('mao', maoReply, true);
-            }, 1000 + Math.random() * 1000);
         }
     }
+    
+    if (sendMessageBtn && chatInput) {
+        sendMessageBtn.addEventListener('click', handleSendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSendMessage();
+            }
+        });
+    }
+    
+    presetQuestionBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const question = btn.textContent;
+            sendMessageAndGetResponse(question);
+        });
+    });
+
+
+    // 添加思考动画样式
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes thinking {
+            0% { opacity: 0.2; }
+            20% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+        
+        .thinking-dots {
+            animation: thinking 1.4s infinite;
+            display: inline-block;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // function addMessage(sender, text) {
+    //     const messageDiv = document.createElement('div');
+    //     messageDiv.className = `chat-message ${sender}`;
+        
+    //     if (sender === 'mao') {
+    //         messageDiv.innerHTML = `
+    //             <div class="flex items-start">
+    //                 <div class="mao-avatar mr-2 flex-shrink-0">
+    //                     <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600">
+    //                         <span class="text-lg font-bold">毛</span>
+    //                     </div>
+    //                 </div>
+    //                 <div class="message-bubble"><p>${text}</p></div>
+    //             </div>`;
+    //     } else { // sender === 'user'
+    //         messageDiv.innerHTML = `
+    //             <div class="flex items-start justify-end">
+    //                 <div class="message-bubble user"><p>${text}</p></div>
+    //                 <div class="user-avatar ml-2 flex-shrink-0">
+    //                      <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+    //                         <span class="text-lg font-bold">您</span>
+    //                     </div>
+    //                 </div>
+    //             </div>`;
+    //     }
+    //     chatMessages.appendChild(messageDiv);
+    //     chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+    // }
+
+    // let maoAI;
+    // if (MaoAIChat) {
+    //     maoAI = new MaoAIChat();
+    // }
+
+    // function handleSendMessage() {
+    //     const messageText = chatInput.value.trim();
+    //     if (messageText) {
+    //         chatInput.value = '';
+    //         sendMessageAndGetResponse(messageText);
+    //         // 添加用户消息
+    //         addMessage('user', message);
+            
+    //         // 显示思考中状态
+    //         const thinkingDiv = document.createElement('div');
+    //         thinkingDiv.className = 'chat-message mao thinking';
+    //         thinkingDiv.innerHTML = `
+    //             <div class="flex items-start">
+    //                 <div class="mao-avatar mr-2 flex-shrink-0">
+    //                     <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600">
+    //                         <span class="text-lg font-bold">毛</span>
+    //                     </div>
+    //                 </div>
+    //                 <div class="message-bubble">
+    //                     <p>思考中<span class="thinking-dots">...</span></p>
+    //                 </div>
+    //             </div>`;
+    //         chatMessages.appendChild(thinkingDiv);
+    //         chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+    //         // 模拟AI思考和回复延迟
+    //         setTimeout(() => {
+    //             // 移除思考中状态
+    //             chatMessages.removeChild(thinkingDiv);
+    //             // 获取毛主席回复
+    //             const maoReply = maoAI.getMaoResponse(message);
+    //             // 使用打字机效果添加回复
+    //             addMessage('mao', maoReply, true);
+    //         }, 1000 + Math.random() * 1000);
+    //     }
+    // }
 
     // --- Initial Load ---
+    
     fetchQuotes();
     fetchArticles();
     showPage('home'); // Show home page initially
