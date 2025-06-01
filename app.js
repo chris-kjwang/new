@@ -120,7 +120,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 { text: "学习的敌人是自己的满足，要认真学习一点东西，必须从不自满开始。", source: "《改造我们的学习》", context: "强调学习要谦虚", year: 1941 },
                 { text: "要做人民的先生，先做人民的学生。", source: "《关于领导方法的若干问题》", context: "强调向群众学习", year: 1943 },
                 { text: "中国的命运一经操在人民自己的手里，中国就将如太阳升起在东方那样，以自己的辉煌的光焰普照大地。", source: "《中国人民站起来了》", context: "宣告新中国的诞生和未来", year: 1949 },
-                { text: "前途是光明的，道路是曲折的。", source: "《关于重庆谈判》", context: "辩证看待革命发展过程", year: 1945 }
+                { text: "前途是光明的，道路是曲折的。", source: "《关于重庆谈判》", context: "辩证看待革命发展过程", year: 1945 },
+                { text: "我们的同志，在困难的时候，要看到成绩，要看到光明，要提高我们的勇气。", source: "《为人民服务》", context: "强调同志的勇气和决心", year: 1944 },
+                { text: "打得赢就打，打不赢就走。" , source: "《关于情况的通报》", context: "阐述斗争的原则", year: 1948 },
+                { text: "调查就像十月怀胎，解决问题就像一朝分娩，调查就是解决问题", source: "《反对本本主义》", context: "强调扎实调研的重要性", year: 1930 },
+                { text: "不是先学好了再干,而是干起来再学习,干就是学习! ", source: "《中国革命战争的战略问题》", context: "学习与实践的关系", year: 1936 },
+                { text: "以斗争求团结则团结存，以退让求团结则团结亡", source: "《目前抗日统一战线中的策略问题》", context: "斗争原则，退让会让对方得寸进尺", year: 1940 },
+                { text: "遇事不怒，基本吃素。多多散步，劳逸适度", source: "《养生十六字诀》", context: "养生之道", year: 1958 }
             ];
             // Add more quotes as needed to reach at least 30
             console.log(`Loaded ${quotesData.length} quotes.`);
