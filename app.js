@@ -1,3 +1,6 @@
+// 导入 MaoAIChat 模块
+import { MaoAIChat } from '../mao-ai.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     const pages = document.querySelectorAll('.page-content');
     const navLinks = document.querySelectorAll('.nav-link');
@@ -502,14 +505,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         chatMessages.appendChild(messageDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
-    }
-    // 引入 MaoAIChat 类
-    let MaoAIChat;
-    try {
-        // 尝试引入 MaoAIChat 类
-        MaoAIChat = require('./mao-ai.js').MaoAIChat;
-    } catch (error) {
-        console.warn('无法引入 MaoAIChat 类，将使用基础对话系统', error);
     }
 
     let maoAI;
