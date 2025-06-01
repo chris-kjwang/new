@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
             card.dataset.articleId = article.id;
             // 使用文章ID动态生成图片路径，并添加降级处理
             const articleImagePath = `images/articles/mao_${article.id}.jpg`;
-
+            const fallbackImagePath = `images/articles/mao_${article.id}.png`;
             card.innerHTML = `
                 <div class="article-image bg-gray-200" style="background-image: url('${articleImagePath}')"></div>
                 <div class="p-4">
