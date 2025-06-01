@@ -15,7 +15,10 @@
     .quote-card {
         height: 250px;  /* 稍微减小高度适应小屏幕 */
     }
-    
+    /* 设置移动端导航链接未选中状态为灰色 */
+    .mobile-nav-link:not(.active) {
+    color: #999999;
+    }
     /* 移动端文章详情页优化 */
     #article-detail-page h2 {
         font-size: 1.5rem;
