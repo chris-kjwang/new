@@ -2,7 +2,6 @@
 import { MaoAIChat } from './mao-ai.js';
 // 将 MaoAIChat 挂载到 window 对象上
 window.MaoAIChat = MaoAIChat;
-import { sendMessageAndGetResponse } from './chat-integration.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const pages = document.querySelectorAll('.page-content');
