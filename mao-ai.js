@@ -1,5 +1,5 @@
 // 增强版AI对话系统 - 毛主席对话模拟
-class MaoAIChat {
+ export class MaoAIChat {
     constructor() {
         this.chatHistory = [];
         this.systemPrompt = `你现在扮演毛泽东主席，以他的思想、阅历和口吻与用户对话。
@@ -231,6 +231,6 @@ class MaoAIChat {
 }
 
 // 导出模块
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { MaoAIChat };
-}
+//if (typeof module !== 'undefined' && module.exports) {
+//    module.exports = { MaoAIChat };
+//}
