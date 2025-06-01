@@ -659,6 +659,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 获取毛主席回复
             const maoReply = maoAI.getMaoResponse(message);
             // 使用打字机效果添加回复
+            console.log("maoReply:", maoReply);
             addMessage('mao', maoReply, true);
         }, 1000 + Math.random() * 1000);
     }
